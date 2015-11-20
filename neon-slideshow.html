@@ -42,10 +42,12 @@ Example:
   </style>
   <template>
     <content></content>
-    <div id="controls" hidden$="[[!arrows]]">
-      <paper-icon-button icon="icons:chevron-left" on-tap="selectPrevious"></paper-icon-button>
-      <paper-icon-button icon="icons:chevron-right" on-tap="selectNext"></paper-icon-button>
-    </div>
+    <template is="dom-if" if="[[arrows]]">
+      <div id="controls">
+        <paper-icon-button icon="icons:chevron-left" on-tap="selectPrevious"></paper-icon-button>
+        <paper-icon-button icon="icons:chevron-right" on-tap="selectNext"></paper-icon-button>
+      </div>
+    </template>
   </template>
 </dom-module>
 <script>
