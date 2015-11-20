@@ -1,0 +1,17 @@
+<link rel="import" href="neon-carousel-behavior.html">
+<link rel="import" href="neon-slideshow-shared-styles.html">
+
+<dom-module id="neon-carousel">
+  <template>
+    <style include="neon-slideshow-shared-styles"></style>
+    <content></content>
+  </template>
+  <script>
+    Polymer({
+      is: 'neon-carousel',
+      behaviors: [
+        Zecat.NeonCarouselBehavior
+      ],
+    });
+  </script>
+</dom-module>

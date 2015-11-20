@@ -1,0 +1,85 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>neon-slideshow Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../iron-flex-layout/classes/iron-flex-layout.html">
+    <link rel="import" href="../../paper-button/paper-button.html">
+    <link rel="import" href="../../paper-card/paper-card.html">
+    <link rel="import" href="../neon-slideshow.html">
+    <link rel="import" href="../neon-carousel.html">
+
+    <link rel="stylesheet" href="../../paper-styles/demo.css">
+
+  </head>
+  <body unresolved>
+
+  <template is="dom-bind" id="app">
+
+    <style is="custom-style">
+      paper-card {
+        margin: 30px;
+      }
+      #slideshow, #carousel {
+        width: 300px;
+        height: 250px;
+      }
+    </style>
+    
+    <div class="layout horizontal wrap center-justified">
+
+      <paper-card heading="Basic slideshow" elevation="1">
+        <neon-slideshow id="slideshow" class="card-content" arrows>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+          <img src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/House_Sparrow_(M)_I_IMG_7881.jpg">
+        </neon-slideshow>
+        <div class="card-actions layout horizontal justified">
+          <paper-button on-tap="toggleSlideshowArrows">Toogle arrows</paper-button>
+        </div>
+      </paper-card>
+
+      <paper-card heading="Basic carousel" elevation="1">
+        <neon-carousel id="carousel" class="card-content" delay="1000">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+          <img src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/House_Sparrow_(M)_I_IMG_7881.jpg">
+        </neon-carousel>
+        <div class="card-actions layout horizontal justified">
+          <paper-button on-tap="carouselPlayPause">Play/Pause</paper-button>
+          <paper-button on-tap="toggleCarouselDirection">Toogle direction</paper-button>
+        </div>
+      </paper-card>
+    
+    </div>
+
+    </template>
+
+  <script>
+
+    var app = document.querySelector('#app');
+    app.toggleSlideshowArrows = function() {
+      app.$.slideshow.arrows = !app.$.slideshow.arrows;
+    };
+    app.carouselPlayPause = function() {
+      app.$.carousel.playing= !app.$.carousel.playing;
+    };
+    app.toggleCarouselDirection = function() {
+      app.$.carousel.direction = app.$.carousel.direction == 'right' ? 'left' : 'right';
+    };
+
+  </script>
+
+  </body>
+</html>
