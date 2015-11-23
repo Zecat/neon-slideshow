@@ -43,13 +43,6 @@
       'neon-animation-finish': '_onNeonAnimationFinish'
     },
     ready: function() {
-      /*
-      *  Give the 'slide' class to each content children
-      *  for neon-animation-shared-styles to find them.
-      */
-      for (slide of this.getContentChildren()) {
-        this.toggleClass('slide', true, slide);
-      }
       this.selected = this.startAt;
     },
     selectNext: function() {

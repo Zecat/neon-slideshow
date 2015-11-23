@@ -15,7 +15,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="neon-slideshow-shared-styles.html">
 
 <!--
-An element providing a solution to no problem in particular.
 
 Example:
 
@@ -41,7 +40,9 @@ Example:
       }
   </style>
   <template>
-    <content></content>
+    <div id="slides">
+      <content></content>
+    </div>
     <template is="dom-if" if="[[arrows]]">
       <div id="controls">
         <paper-icon-button icon="icons:chevron-left" on-tap="selectPrevious"></paper-icon-button>
