@@ -1,0 +1,70 @@
+<link rel="import" href="../iron-draggable/iron-draggable-behavior.html">
+<link rel="import" href="../iron-selector/iron-selectable.html">
+<link rel="import" href="../neon-advanced-animations/horizontal-scroll-animation.html">
+<link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../polymer/polymer.html">
+
+
+<script>
+
+  window.Zecat = window.Zecat || {};
+
+  Zecat.NeonSlideshowScrollableBehaviorImpl = {
+    properties: {
+      centerSlideOnTap : {
+        type: Boolean,
+        value: false,
+        observer: '_centerSlideOnTapChanged'
+      },
+      animationConfig: {
+        value: function() {
+          return {
+            'scroll' : {
+              name: 'horizontal-scroll-animation',
+              node: this,
+              shift: 0
+            }
+          }
+        }
+      } 
+    },
+
+    listeners: {
+      'iron-select': '_selectedSlideChange'
+    },
+
+    centerSlide: function(slide) {
+      this.scroll((slide.offsetWidth - this.offsetWidth) / 2 + slide.offsetLeft - this.scrollLeft);
+    },
+    
+    scroll: function(shift) {
+      // check for overflow to the left
+      if (this.scrollLeft <= -shift) {
+        shift = -this.scrollLeft;
+      }
+      // check for overflow to the right
+      if (shift >= (remainingWidth = this.scrollWidth - this.scrollLeft - this.offsetWidth)) {
+        shift = remainingWidth;
+      }
+      this.animationConfig.scroll.shift = shift;
+      this.playAnimation('scroll');
+    },
+
+    _centerSlideOnTapChanged: function(centerSlideOnTap) {
+      this.activateEvent = centerSlideOnTap ? 'tap' : '';
+    },
+
+    _selectedSlideChange: function(e, selected) {
+      this.centerSlide(selected.item);
+    }
+    
+  };
+
+  Zecat.NeonSlideshowScrollableBehavior = [
+    Polymer.IronSelectableBehavior,
+    Polymer.NeonAnimationRunnerBehavior,
+    Zecat.IronDraggableBehavior,
+    Zecat.NeonSlideshowScrollableBehaviorImpl
+  ];
+
+</script>
