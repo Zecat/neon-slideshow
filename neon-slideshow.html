@@ -10,6 +10,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-controls/paper-controllable-behavior.html">
+<link rel="import" href="../paper-controls/paper-slideshow-controls.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="neon-slideshow-behavior.html">
 
@@ -42,28 +44,13 @@ Example:
       position: relative;
       overflow: hidden;
     }
-    paper-icon-button {
-      color: white;
-      height: 60px;
-      width: 60px;
-    }
-    #controls {
-      @apply(--layout-fit);
-      @apply(--layout-horizontal);
-      @apply(--layout-center);
-      @apply(--layout-justified);
-    }
   </style>
   <template>
     <div id="slides">
       <content></content>
     </div>
-    <template is="dom-if" if="[[arrows]]">
-      <div id="controls">
-        <paper-icon-button icon="icons:chevron-left" on-tap="selectPrevious"></paper-icon-button>
-        <paper-icon-button icon="icons:chevron-right" on-tap="selectNext"></paper-icon-button>
-      </div>
-    </template>
+    <paper-slideshow-controls arrows="[[arrows]]">
+    </paper-slideshow-controls>
   </template>
 </dom-module>
 <script>
@@ -80,6 +67,7 @@ Example:
       }
     },
     behaviors: [
+      Zecat.PaperControllableBehavior,
       Zecat.NeonSlideshowBehavior
     ]
   })
