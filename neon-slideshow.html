@@ -12,7 +12,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="neon-slideshow-behavior.html">
-<link rel="import" href="neon-slideshow-shared-styles.html">
 
 <!--
 
@@ -26,18 +25,34 @@ Example:
 @hero hero.svg
 -->
 <dom-module id="neon-slideshow">
-  <style include="neon-slideshow-shared-styles">
-     paper-icon-button {
-        color: white;
-        height: 60px;
-        width: 60px;
-      }
-      #controls {
-        @apply(--layout-fit);
-        @apply(--layout-horizontal);
-        @apply(--layout-center);
-        @apply(--layout-justified);
-      }
+  <style>
+    :host #slides > ::content > * {
+      @apply(--layout-fit);
+      width: 100%;
+      height: 100%;
+    }
+    :host #slides > ::content > :not(.iron-selected):not(.neon-animating) {
+      display: none !important;
+    }
+    :host #slides > ::content > .neon-animating {
+      pointer-events: none;
+    }
+    :host {
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    paper-icon-button {
+      color: white;
+      height: 60px;
+      width: 60px;
+    }
+    #controls {
+      @apply(--layout-fit);
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+      @apply(--layout-justified);
+    }
   </style>
   <template>
     <div id="slides">
