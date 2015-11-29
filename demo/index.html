@@ -15,8 +15,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <title>neon-slideshow Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../../iron-flex-layout/classes/iron-flex-layout.html">
+    <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
     <link rel="import" href="../../paper-button/paper-button.html">
     <link rel="import" href="../../paper-card/paper-card.html">
+    <link rel="import" href="../../paper-toggle-button/paper-toggle-button.html">
     <link rel="import" href="../neon-carousel.html">
     <link rel="import" href="../neon-slideshow.html">
     <link rel="import" href="../neon-slideshow-scrollable.html">
@@ -40,35 +42,51 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 720px;
         height: 250px; 
       }
+      .card-actions {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        @apply(--layout-justified);
+        height: 45px;
+      }
     </style>
     
     <div class="layout horizontal wrap center-justified">
 
-      <paper-card heading="Basic slideshow" elevation="1">
-        <neon-slideshow id="slideshow" class="card-content" arrows>
+      <paper-card heading="Basic slideshow">
+        <neon-slideshow
+          id="slideshow"
+          class="card-content"
+          arrows="[[arrows]]">
           <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
           <img src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
           <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/House_Sparrow_(M)_I_IMG_7881.jpg">
         </neon-slideshow>
-        <div class="card-actions layout horizontal justified">
-          <paper-button on-tap="toggleSlideshowArrows">Toogle arrows</paper-button>
+        <div class="card-actions">
+          <paper-toggle-button checked="{{arrows}}">With arrows</paper-toggle-button>
         </div>
       </paper-card>
 
-      <paper-card heading="Basic carousel" elevation="1">
-        <neon-carousel id="carousel" class="card-content" delay="1000">
+      <paper-card heading="Basic carousel">
+        <neon-carousel
+          id="carousel"
+          class="card-content"
+          delay="1000"
+          playing="[[playing]]">
           <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
           <img src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
           <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/House_Sparrow_(M)_I_IMG_7881.jpg">
         </neon-carousel>
-        <div class="card-actions layout horizontal justified">
-          <paper-button on-tap="carouselPlayPause">Play/Pause</paper-button>
+        <div class="card-actions">
+          <paper-toggle-button checked="{{playing}}">Playing</paper-toggle-button>
           <paper-button on-tap="toggleCarouselDirection">Toogle direction</paper-button>
         </div>
       </paper-card>
 
-      <paper-card heading="Slideshow" elevation="1">
-        <neon-slideshow-scrollable id="scrollableSlideshow" center-slide-on-tap>
+      <paper-card heading="Scrollable slideshow">
+        <neon-slideshow-scrollable 
+          id="scrollableSlideshow"
+          center-slide-on-tap="[[centerSlideOnTap]]"
+          center-slide-on-track-end="[[centerSlideOnTrackEnd]]">
           <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
           <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
           <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
@@ -76,9 +94,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
           <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
         </neon-slideshow-scrollable>
-        <div class="card-actions layout horizontal justified">
-          <paper-button on-tap="">Action 1</paper-button>
-          <paper-button on-tap="">Action 2</paper-button>
+        <div class="card-actions">
+          <paper-toggle-button checked="{{centerSlideOnTap}}">Center slide on track end</paper-toggle-button>
+          <paper-toggle-button checked="{{centerSlideOnTrackEnd}}">Center slide on track end</paper-toggle-button>
         </div>
       </paper-card>
     
@@ -89,12 +107,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
 
     var app = document.querySelector('#app');
-    app.toggleSlideshowArrows = function() {
-      app.$.slideshow.arrows = !app.$.slideshow.arrows;
-    };
-    app.carouselPlayPause = function() {
-      app.$.carousel.playing= !app.$.carousel.playing;
-    };
     app.toggleCarouselDirection = function() {
       app.$.carousel.direction = app.$.carousel.direction == 'right' ? 'left' : 'right';
     };
