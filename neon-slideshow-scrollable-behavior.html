@@ -11,6 +11,18 @@
 
   Zecat.NeonSlideshowScrollableBehaviorImpl = {
     properties: {
+      animationConfig: {
+        value: function() {
+          return {
+            'scroll' : {
+              name: 'horizontal-scroll-animation',
+              node: this,
+              timing: null,
+              shift: 0
+            }
+          }
+        }
+      },
       centerSlideOnTap: {
         type: Boolean,
         value: false,
@@ -20,17 +32,10 @@
         type: Boolean,
         value: false
       },
-      animationConfig: {
-        value: function() {
-          return {
-            'scroll' : {
-              name: 'horizontal-scroll-animation',
-              node: this,
-              shift: 0
-            }
-          }
-        }
-      } 
+      scrollAnimationTiming: {
+        type: Object,
+        value: null
+      }
     },
 
     listeners: {
@@ -65,15 +70,18 @@
     },
 
     _trackEnd: function() {
-      // if sroll is at max or min value, do nothing
-      if (!this.centerSlideOnTrackEnd
-          || !this.scrollLeft 
-          || (this.scrollLeft + this.offsetWidth) == this.scrollWidth) {
+      if (!this.centerSlideOnTrackEnd) {
+        return;
+      }
+      if ((this.scrollLeft + this.offsetWidth) == this.scrollWidth) {
+        this.select(this.items.length);
         return;
       }
       for (slide of this.items) {
-        if (this.scrollLeft < slide.offsetLeft) {
-          this.centerSlide(slide);
+        //fix that to select the good slide
+        var slideshowAbsoluteCenter = this.scrollLeft + this.offsetWidth / 2;
+        if (slide.offsetLeft + slide.offsetWidth >= slideshowAbsoluteCenter) {
+          this.select(this.indexOf(slide));
           return;
         }
       }
