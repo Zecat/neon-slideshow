@@ -11,10 +11,14 @@
 
   Zecat.NeonSlideshowScrollableBehaviorImpl = {
     properties: {
-      centerSlideOnTap : {
+      centerSlideOnTap: {
         type: Boolean,
         value: false,
         observer: '_centerSlideOnTapChanged'
+      },
+      centerSlideOnTrackEnd: {
+        type: Boolean,
+        value: false
       },
       animationConfig: {
         value: function() {
@@ -30,7 +34,9 @@
     },
 
     listeners: {
-      'iron-select': '_selectedSlideChange'
+      'iron-select': '_selectedSlideChange',
+      // event fired from iron-draggable-behavior
+      'track-end': '_trackEnd'
     },
 
     centerSlide: function(slide) {
@@ -56,6 +62,21 @@
 
     _selectedSlideChange: function(e, selected) {
       this.centerSlide(selected.item);
+    },
+
+    _trackEnd: function() {
+      // if sroll is at max or min value, do nothing
+      if (!this.centerSlideOnTrackEnd
+          || !this.scrollLeft 
+          || (this.scrollLeft + this.offsetWidth) == this.scrollWidth) {
+        return;
+      }
+      for (slide of this.items) {
+        if (this.scrollLeft < slide.offsetLeft) {
+          this.centerSlide(slide);
+          return;
+        }
+      }
     }
     
   };
