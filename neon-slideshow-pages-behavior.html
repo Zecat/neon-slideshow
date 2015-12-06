@@ -12,7 +12,7 @@
 
   window.Zecat = window.Zecat || {};
 
-  Zecat.NeonSlideshowBehaviorImpl = {
+  Zecat.NeonSlideshowPagesBehaviorImpl = {
     properties: {
       activateEvent: {
         type: String,
@@ -22,11 +22,6 @@
       animateInitialSelection: {
         type: Boolean,
         value: false
-      },
-      _choosedDirection: {
-        type: String,
-        value: '',
-        observer: '_setAnimations'
       },
       /**
        * The carousel's initial item's index.
@@ -45,18 +40,7 @@
     ready: function() {
       this.selected = this.startAt;
     },
-    selectNext: function() {
-      var index = (Number(this._valueToIndex(this.selected)) + 1) % this.items.length;
-      this._choosedDirection = "right";
-      this.selected = this._indexToValue(index);
-    },
-    selectPrevious: function() {
-      var length = this.items.length;
-      var index = (Number(this._valueToIndex(this.selected)) - 1 + length) % length;
-      this._choosedDirection = "left";
-      this.selected = this._indexToValue(index);
-    },
-    _setAnimations: function(choosedDirection) {
+    setAnimationDirection: function(choosedDirection) {
       switch (choosedDirection) {
         case 'left':
           this.entryAnimation = "slide-from-left-animation";
@@ -69,17 +53,17 @@
       }
     },
     _selectedChanged: function(selected) {
+      if(selected < this._prevSelected) {
+        this.setAnimationDirection("left");
+      } else {
+        this.setAnimationDirection("right");
+      }
+      this._performSlideAnimation(selected);
+    },
+
+    _performSlideAnimation: function(selected) {
       var selectedPage = this.selectedItem;
       var oldPage = this._valueToItem(this._prevSelected) || false;
-      // if direction hasn't been set by selectPrevious or selectNext
-      if (!this._choosedDirection) {
-        //TODO if this.no-loop == false, choose the closer way to set direction
-        if(selected < this._prevSelected) {
-          this._choosedDirection = "left";
-        } else {
-          this._choosedDirection = "right";
-        }
-      }
       this._prevSelected = selected;
 
       // on initial load and if animateInitialSelection is negated, simply display selectedPage.
@@ -171,11 +155,11 @@
     }
   };
 
-  Zecat.NeonSlideshowBehavior = [
+  Zecat.NeonSlideshowPagesBehavior = [
     Polymer.IronResizableBehavior,
     Polymer.IronSelectableBehavior,
     Polymer.NeonAnimationRunnerBehavior,
-    Zecat.NeonSlideshowBehaviorImpl
+    Zecat.NeonSlideshowPagesBehaviorImpl
   ];
 
 </script>

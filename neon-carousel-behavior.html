@@ -1,11 +1,10 @@
-<link rel="import" href="neon-slideshow-behavior.html">
 <link rel="import" href="../polymer/polymer.html">
 
 <script>
 
   window.Zecat = window.Zecat || {};
 
-  Zecat.NeonCarouselBehaviorImpl = {
+  Zecat.NeonCarouselBehavior = {
     properties: {
       /**
        * If playing, the carousel slides automatically according to the delay
@@ -25,7 +24,7 @@
         notify: true
       },
       /**
-       * Set the animation direction, 'right' or 'left'
+       * Get or set the animation direction, 'right' or 'left'
        */
       direction: {
         type: String,
@@ -65,10 +64,5 @@
       }
     }
   };
-
-  Zecat.NeonCarouselBehavior = [
-    Zecat.NeonSlideshowBehavior,
-    Zecat.NeonCarouselBehaviorImpl
-  ];
 
 </script>

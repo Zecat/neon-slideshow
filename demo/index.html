@@ -18,10 +18,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
     <link rel="import" href="../../paper-button/paper-button.html">
     <link rel="import" href="../../paper-card/paper-card.html">
+    <link rel="import" href="../../paper-tabs/paper-tabs.html">
+    <link rel="import" href="../../paper-tabs/paper-tab.html">
     <link rel="import" href="../../paper-toggle-button/paper-toggle-button.html">
-    <link rel="import" href="../neon-carousel.html">
-    <link rel="import" href="../neon-slideshow.html">
+    <link rel="import" href="../neon-carousel-pages.html">
+    <link rel="import" href="../neon-slideshow-pages.html">
     <link rel="import" href="../neon-slideshow-scrollable.html">
+    <!-- <link rel="import" href="neon-slideshow-overlay.html"> -->
 
     <link rel="stylesheet" href="../../paper-styles/demo.css">
 
@@ -42,32 +45,61 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 720px;
         height: 250px; 
       }
-      .card-actions {
-        @apply(--layout-horizontal);
-        @apply(--layout-center);
-        @apply(--layout-justified);
-        height: 45px;
+      paper-card {
+        --paper-card-content: {
+          padding: 0;
+        };
+        --paper-card-actions: {
+          @apply(--layout-horizontal);
+          @apply(--layout-center);
+          @apply(--layout-center-justified);
+          height: 45px;
+        };
+      }
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--default-primary-color);
+      }
+      paper-toggle-button {
+        margin: 0 20px;
       }
     </style>
+
+    <!-- <neon-slideshow-overlay  with-backdrop center-slide-on-tap auto-fit-on-attach arrows>
+      <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
+      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+      <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg"><img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
+      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+      <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
+    </neon-slideshow-overlay> -->
     
     <div class="layout horizontal wrap center-justified">
 
-      <paper-card heading="Basic slideshow">
-        <neon-slideshow
+      <paper-card heading="Neon-slideshow-pages">
+        <neon-slideshow-pages
+          selected="{{selected}}"
           id="slideshow"
           class="card-content"
           arrows="[[arrows]]">
           <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
           <img src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
           <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/House_Sparrow_(M)_I_IMG_7881.jpg">
-        </neon-slideshow>
+        </neon-slideshow-pages>
         <div class="card-actions">
-          <paper-toggle-button checked="{{arrows}}">With arrows</paper-toggle-button>
+          <paper-tabs selected="{{selected}}" class="fit" noink>
+            <paper-tab>SLIDE 1</paper-tab>
+            <paper-tab>SLIDE 2</paper-tab>
+            <paper-tab>SLIDE 3</paper-tab>
+          </paper-tabs>
+        </div>
+        <div class="card-actions">
+          <paper-toggle-button checked="{{arrows}}">arrows</paper-toggle-button>
         </div>
       </paper-card>
 
-      <paper-card heading="Basic carousel">
-        <neon-carousel
+      <paper-card heading="Neon-carousel-pages">
+        <neon-carousel-pages
           id="carousel"
           class="card-content"
           delay="1000"
@@ -75,9 +107,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
           <img src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
           <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/House_Sparrow_(M)_I_IMG_7881.jpg">
-        </neon-carousel>
+        </neon-carousel-pages>
         <div class="card-actions">
           <paper-toggle-button checked="{{playing}}">Playing</paper-toggle-button>
+        </div>
+        <div class="card-actions">
           <paper-button on-tap="toggleCarouselDirection">Toogle direction</paper-button>
         </div>
       </paper-card>
@@ -95,7 +129,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
         </neon-slideshow-scrollable>
         <div class="card-actions">
-          <paper-toggle-button checked="{{centerSlideOnTap}}">Center slide on track end</paper-toggle-button>
+          <paper-toggle-button checked="{{centerSlideOnTap}}">Center slide on tap</paper-toggle-button>
           <paper-toggle-button checked="{{centerSlideOnTrackEnd}}">Center slide on track end</paper-toggle-button>
         </div>
       </paper-card>

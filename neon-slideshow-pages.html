@@ -8,42 +8,24 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../paper-controls/paper-controllable-behavior.html">
 <link rel="import" href="../paper-controls/paper-slideshow-controls.html">
-<link rel="import" href="../paper-icon-button/paper-icon-button.html">
-<link rel="import" href="neon-slideshow-behavior.html">
+<link rel="import" href="neon-pages-shared-styles.html">
+<link rel="import" href="neon-slideshow-pages-behavior.html">
 
 <!--
 
 Example:
 
-    <neon-slideshow></neon-slideshow>
+    <neon-slideshow-pages></neon-slideshow-pages>
 
 @group Seed Elements
-@element neon-slideshow
+@element neon-slideshow-pages
 @demo demo/index.html
 @hero hero.svg
 -->
-<dom-module id="neon-slideshow">
-  <style>
-    :host #slides > ::content > * {
-      @apply(--layout-fit);
-      width: 100%;
-      height: 100%;
-    }
-    :host #slides > ::content > :not(.iron-selected):not(.neon-animating) {
-      display: none !important;
-    }
-    :host #slides > ::content > .neon-animating {
-      pointer-events: none;
-    }
-    :host {
-      display: block;
-      position: relative;
-      overflow: hidden;
-    }
+<dom-module id="neon-slideshow-pages">
+  <style include="neon-pages-shared-styles">
   </style>
   <template>
     <div id="slides">
@@ -56,7 +38,7 @@ Example:
 <script>
 (function() {
   Polymer({
-    is: 'neon-slideshow',
+    is: 'neon-slideshow-pages',
     properties: {
       /**
        * If true, display arrows controls
@@ -68,7 +50,7 @@ Example:
     },
     behaviors: [
       Zecat.PaperControllableBehavior,
-      Zecat.NeonSlideshowBehavior
+      Zecat.NeonSlideshowPagesBehavior
     ]
   })
 })();

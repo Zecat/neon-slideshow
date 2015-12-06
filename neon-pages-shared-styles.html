@@ -1,11 +1,8 @@
-<link rel="import" href="neon-carousel-behavior.html">
-<link rel="import" href="../polymer/polymer.html">
-
-<dom-module id="neon-carousel">
+<dom-module id="neon-pages-shared-styles">
   <template>
     <style>
       :host #slides > ::content > * {
-        @apply(--layout-fit);
+        position: absolute;
         width: 100%;
         height: 100%;
       }
@@ -17,18 +14,8 @@
       }
       :host {
         display: block;
-        position: relative;
         overflow: hidden;
       }
     </style>
-    <div id="slides"><content></content></div>
   </template>
-  <script>
-    Polymer({
-      is: 'neon-carousel',
-      behaviors: [
-        Zecat.NeonCarouselBehavior
-      ],
-    });
-  </script>
-</dom-module>
+</som-module>
