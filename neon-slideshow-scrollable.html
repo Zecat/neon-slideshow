@@ -1,7 +1,13 @@
-<link rel="import" href="../paper-controls/paper-slideshow-controls.html">
-<link rel="import" href="../paper-controls/paper-controllable-behavior.html">
+<link rel="import" href="../iron-controls/iron-slideshow-controls.html">
+<link rel="import" href="../iron-controls/iron-controllable-behavior.html">
 <link rel="import" href="neon-slideshow-scrollable-behavior.html">
 
+<!--
+@group Neon Elements
+@element neon-slideshow-scrollable
+@demo demo/index.html
+@hero hero.svg
+-->
 <dom-module id="neon-slideshow-scrollable">
   <template>
 
@@ -17,7 +23,7 @@
       }
     </style>
     <content></content>
-    <paper-slideshow-controls arrows="[[arrows]]"></paper-slideshow-controls>
+    <iron-slideshow-controls arrows="[[arrows]]"></iron-slideshow-controls>
   </template>
   <script>
     Polymer({
@@ -35,7 +41,7 @@
 
       behaviors: [
         Zecat.NeonSlideshowScrollableBehavior,
-        Zecat.PaperControllableBehavior
+        Zecat.IronControllableBehavior
       ]
     });
   </script>

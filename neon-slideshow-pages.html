@@ -8,8 +8,8 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-controls/paper-controllable-behavior.html">
-<link rel="import" href="../paper-controls/paper-slideshow-controls.html">
+<link rel="import" href="../iron-controls/iron-controllable-behavior.html">
+<link rel="import" href="../iron-controls/iron-slideshow-controls.html">
 <link rel="import" href="neon-pages-shared-styles.html">
 <link rel="import" href="neon-slideshow-pages-behavior.html">
 
@@ -17,9 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 Example:
 
-    <neon-slideshow-pages></neon-slideshow-pages>
-
-@group Seed Elements
+@group Neon Elements
 @element neon-slideshow-pages
 @demo demo/index.html
 @hero hero.svg
@@ -31,8 +29,8 @@ Example:
     <div id="slides">
       <content></content>
     </div>
-    <paper-slideshow-controls arrows="[[arrows]]">
-    </paper-slideshow-controls>
+    <iron-slideshow-controls arrows="[[arrows]]">
+    </iron-slideshow-controls>
   </template>
 </dom-module>
 <script>
@@ -49,7 +47,7 @@ Example:
       }
     },
     behaviors: [
-      Zecat.PaperControllableBehavior,
+      Zecat.IronControllableBehavior,
       Zecat.NeonSlideshowPagesBehavior
     ]
   })

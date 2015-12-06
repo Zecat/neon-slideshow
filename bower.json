@@ -24,7 +24,7 @@
     "iron-selector": "PolymerElements/iron-selector#~1.0.8",
     "iron-draggable": "https://github.com/Zecat/iron-draggable.git#master",
     "neon-advanced-animations": "https://github.com/Zecat/neon-advanced-animations.git#master",
-    "paper-controls": "https://github.com/Zecat/paper-controls.git#master",
+    "iron-controls": "https://github.com/Zecat/iron-controls.git#master",
     "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#~1.1.1"
   },
   "devDependencies": {

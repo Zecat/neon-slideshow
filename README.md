@@ -1,7 +1,6 @@
 # neon-slideshow
 
 
-
 ### Demo & doc
 
 See the [component page](http://zecat.github.io/neon-slideshow) for more information.
@@ -12,7 +11,7 @@ See the [component page](http://zecat.github.io/neon-slideshow) for more informa
 
 - prevent selection while the previous animation isn't finished or speed up the animation.
 - create neon-slideshow-behavior, common behavior between every neon-slideshow-x-behavior.
-- change paper-controls to iron-controls.
+- finish iron-controls element.
 
 #### neon-slideshow-scrollable
 
@@ -26,3 +25,4 @@ See the [component page](http://zecat.github.io/neon-slideshow) for more informa
 #### neon-carousel-behavior
 
 - delay souldn't be inferior to the animation duration.
+- add toggleDirection()
