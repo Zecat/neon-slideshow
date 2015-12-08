@@ -15,7 +15,7 @@
     <link rel="import" href="../neon-carousel-pages.html">
     <link rel="import" href="../neon-slideshow-pages.html">
     <link rel="import" href="../neon-slideshow-scrollable.html">
-    <!-- <link rel="import" href="neon-slideshow-overlay.html"> -->
+    <link rel="import" href="../custom/neon-slideshow-scrollable-overlay.html">
 
     <link rel="stylesheet" href="../../paper-styles/demo.css">
 
@@ -54,16 +54,6 @@
         margin: 0 20px;
       }
     </style>
-
-    <!-- <neon-slideshow-overlay  with-backdrop center-slide-on-tap auto-fit-on-attach arrows>
-      <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
-      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
-      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
-      <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg"><img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
-      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
-      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
-      <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
-    </neon-slideshow-overlay> -->
     
     <div class="layout horizontal wrap center-justified">
 
@@ -123,9 +113,25 @@
           <paper-toggle-button checked="{{centerSlideOnTap}}">Center slide on tap</paper-toggle-button>
           <paper-toggle-button checked="{{centerSlideOnTrackEnd}}">Center slide on track end</paper-toggle-button>
         </div>
-      </paper-card>
-    
+      </paper-card>    
     </div>
+    <div class="layout horizontal center-justified">
+      <paper-button raised on-tap="openSlideshowOverlay">Open Overlay Slideshow</paper-button>
+    </div>
+
+    <neon-slideshow-scrollable-overlay
+      id="slideshowOverlay"
+      with-backdrop
+      center-slide-on-tap
+      auto-fit-on-attach arrows>
+      <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
+      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+      <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg"><img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
+      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+      <img draggable="false" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Glossy-starling_Blue_and_Purple_Bird_3_(4872087117).jpg">
+      <img draggable="false" src="https://pixabay.com/static/uploads/photo/2013/07/18/14/50/bird-163770_640.jpg">
+    </neon-slideshow-scrollable-overlay>
 
     </template>
 
@@ -135,6 +141,9 @@
     app.toggleCarouselDirection = function() {
       app.$.carousel.direction = app.$.carousel.direction == 'right' ? 'left' : 'right';
     };
+    app.openSlideshowOverlay = function() {
+      app.$.slideshowOverlay.open();
+    }
 
   </script>
 

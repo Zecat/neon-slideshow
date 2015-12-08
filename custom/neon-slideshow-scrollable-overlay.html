@@ -1,10 +1,9 @@
+<link rel="import" href="../../polymer/polymer.html">
 <link rel="import" href="../../iron-overlay-behavior/iron-overlay-behavior.html">
-<link rel="import" href="../../paper-controls/paper-slideshow-controls.html">
-<link rel="import" href="../../paper-controls/paper-controllable-behavior.html">
 <link rel="import" href="../../paper-styles/shadow.html">
 <link rel="import" href="../neon-slideshow-scrollable-behavior.html">
 
-<dom-module id="neon-slideshow-overlay">
+<dom-module id="neon-slideshow-scrollable-overlay">
   <template>
     <style>
       :host {
@@ -17,26 +16,26 @@
         @apply(--layout-flex-none);
         @apply(--shadow-elevation-8dp);
         height: 100%;
-        margin: 40px;
+        margin: 0 40px;
       }
     </style>
     <content></content>
-    <paper-slideshow-controls arrows="[[arrows]]"></paper-slideshow-controls>
   </template>
   <script>
     Polymer({
-      is: 'neon-slideshow-overlay',
-      properties: {
-        arrows: {
-          type: Boolean,
-          value: false
-        }
-      },
+      is: 'neon-slideshow-scrollable-overlay',
       behaviors: [
         Polymer.IronOverlayBehavior,
-        Zecat.NeonSlideshowScrollableBehavior,
-        Zecat.PaperControllableBehavior
-      ]
+        Zecat.NeonSlideshowScrollableBehavior
+      ],
+      listeners: {
+        'tap': '_closeIfNeeded'
+      },
+      _closeIfNeeded: function(e) {
+        if (e.target == this) {
+          this.close();
+        }
+      }
     });
   </script>
 </dom-module>
