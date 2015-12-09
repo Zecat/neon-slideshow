@@ -22,7 +22,8 @@
       :host ::content > * {
         @apply(--layout-flex-none);
         @apply(--shadow-elevation-8dp);
-        height: var(--neon-slideshow-scrollable-overlay-content-height, 80%);
+        max-height: var(--neon-slideshow-scrollable-overlay-content-max-height, 80%);
+        max-width: 100%;
         margin: 0 40px;
       }
     </style>
