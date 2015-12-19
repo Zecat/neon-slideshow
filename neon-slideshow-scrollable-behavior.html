@@ -1,6 +1,6 @@
 <link rel="import" href="../iron-draggable/iron-draggable-behavior.html">
 <link rel="import" href="../iron-selector/iron-selectable.html">
-<link rel="import" href="../neon-advanced-animations/horizontal-scroll-animation.html">
+<link rel="import" href="../neon-advanced-animations/scroll-animation.html">
 <link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../polymer/polymer.html">
 
@@ -18,10 +18,10 @@
         value: function() {
           return {
             'scroll' : {
-              name: 'horizontal-scroll-animation',
+              name: 'scroll-animation',
               node: this,
               timing: null,
-              shift: 0
+              xShift: 0
             }
           }
         }
@@ -51,16 +51,16 @@
       this.scroll((slide.offsetWidth - this.offsetWidth) / 2 + slide.offsetLeft - this.scrollLeft);
     },
     
-    scroll: function(shift) {
+    scroll: function(xShift) {
       // check for overflow to the left
-      if (this.scrollLeft <= -shift) {
-        shift = -this.scrollLeft;
+      if (this.scrollLeft <= -xShift) {
+        xShift = -this.scrollLeft;
       }
       // check for overflow to the right
-      if (shift >= (remainingWidth = this.scrollWidth - this.scrollLeft - this.offsetWidth)) {
-        shift = remainingWidth;
+      if (xShift >= (remainingWidth = this.scrollWidth - this.scrollLeft - this.offsetWidth)) {
+        xShift = remainingWidth;
       }
-      this.animationConfig.scroll.shift = shift;
+      this.animationConfig.scroll.xShift = xShift;
       this.playAnimation('scroll');
     },
 
