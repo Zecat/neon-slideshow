@@ -44,11 +44,14 @@
     listeners: {
       'iron-select': '_selectedSlideChange',
       // event fired from iron-draggable-behavior
-      'track-end': '_trackEnd'
+      'track-end': '_trackEnd',
+      'iron-overlay-opened': '_ironOverlayOpened'
     },
 
     centerSlide: function(slide) {
-      this.scroll((slide.offsetWidth - this.offsetWidth) / 2 + slide.offsetLeft - this.scrollLeft);
+      if (this.offsetWidth) {
+        this.scroll(this._scrollLeftForSlideCentered(slide) - this.scrollLeft);
+      }
     },
     
     scroll: function(xShift) {
@@ -68,8 +71,16 @@
       this.activateEvent = centerSlideOnTap ? 'tap' : '';
     },
 
+    _ironOverlayOpened: function() {
+      this.scrollLeft = this._scrollLeftForSlideCentered(this.selectedItem);
+    },
+
     _selectedSlideChange: function(e, selected) {
       this.centerSlide(selected.item);
+    },
+
+    _scrollLeftForSlideCentered: function(slide) {
+      return (slide.offsetWidth - this.offsetWidth) / 2 + slide.offsetLeft
     },
 
     _trackEnd: function() {
